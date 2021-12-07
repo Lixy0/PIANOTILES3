@@ -189,7 +189,7 @@ class Tableau1 extends Phaser.Scene{
             this.triangle.setTintFill(0x660099);
         }
 
-        //simple feedback & changement de sens géré par active
+        //simple feedback & changement de sens géré par actif dans update()
         if(lettre==="t"){
             this.bounce(this.carre);
         }
@@ -199,7 +199,7 @@ class Tableau1 extends Phaser.Scene{
         if(lettre==="b"){
             this.bounce(this.triangle);
         }
-        //simple feedback & clignottement géré par active
+        //simple feedback & clignottement géré par actif dans update()
         if(lettre==="y"){
             this.bounce(this.carre);
         }
@@ -345,9 +345,6 @@ class Tableau1 extends Phaser.Scene{
 
     /**
      * Applique une composition
-     * O--
-     * -X-
-     * --A
      */
     compositionU(){
         this.tweens.add({
@@ -377,9 +374,6 @@ class Tableau1 extends Phaser.Scene{
     }
     /**
      * Applique une composition
-     * --A
-     * -X-
-     * O--
      */
     compositionI(){
         this.tweens.add({
@@ -409,9 +403,6 @@ class Tableau1 extends Phaser.Scene{
     }
     /**
      * Applique une composition
-     * -O-
-     * -X-
-     * -A-
      */
     compositionO(){
         this.tweens.add({
@@ -442,9 +433,6 @@ class Tableau1 extends Phaser.Scene{
 
     /**
      * Applique une composition
-     * ---
-     * OXA
-     * ---
      */
     compositionP(){
         this.tweens.add({
