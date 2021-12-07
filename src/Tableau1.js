@@ -69,7 +69,7 @@ class Tableau1 extends Phaser.Scene{
      * Crée le décor
      */
     creerFormes(){
-        this.fond=this.add.image(0,0,"fond");
+        this.fond=this.add.image(300,300,"fond");
         this.carre=this.add.image(100,300,"carre");
         this.croix=this.add.image(300,300,"croix");
         this.triangle=this.add.image(500,300,"triangle");
