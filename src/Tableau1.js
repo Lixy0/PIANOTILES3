@@ -1,14 +1,17 @@
-/**
- * ALGO: ceci est une classe...
- * Vous verrez ça plus tard en détail avec Rémi, pour l'instant on n'a pas trop besoin de savoir à quoi ça sert.
- */
 class Tableau1 extends Phaser.Scene{
     /**
-     * Précharge les assets
+     * ASSETS
      */
     preload(){
         this.load.image("fond","assets/fond.jpg");
-        this.load.image("carre","assets/carre.png");
+        this.load.image("M1","assets/M1.png");
+        this.load.image("M2","assets/M2.png");
+        this.load.image("M3","assets/M3.png");
+        this.load.image("M4","assets/M4.png");
+        this.load.image("F1","assets/F1.png");
+        this.load.image("F2","assets/F2.png");
+        this.load.image("F3","assets/F3.png");
+        this.load.image("F4","assets/F3.png");
         this.load.image("triangle","assets/triangle.png");
         this.load.image("croix","assets/croix.png");
     }
@@ -35,13 +38,6 @@ class Tableau1 extends Phaser.Scene{
 
         //initialise les écoutes de touches pressées et relâchées
         this.initKeyboard();
-
-        /**
-         * influera sur la vitesse de rotation
-         * modifié par les touches J K L M
-         * @type {number}
-         */
-        this.vitesse=1;
     }
 
     /**
@@ -54,7 +50,7 @@ class Tableau1 extends Phaser.Scene{
         let x=1;
         for(let lettre of this.lettres){
             let objetGraphique=this.add.text(x,1,lettre,{
-                color:"#FFFFFF", //blanc
+                color:"#464646", //blanc
                 align:"center",
                 backgroundColor:"#000000", //noir
                 fixedWidth:espacement-1  // -1 c'est pour avoir une petite marge d'un pixel entre les lettres
@@ -65,17 +61,19 @@ class Tableau1 extends Phaser.Scene{
             objetGraphique.name=lettre;
         }
     }
+
+
     /**
      * Crée le décor
      */
     creerFormes(){
-        this.fond=this.add.image(300,300,"fond");
-        this.carre=this.add.image(100,300,"carre");
-        this.croix=this.add.image(300,300,"croix");
-        this.triangle=this.add.image(500,300,"triangle");
-        this.carre.blendMode=Phaser.BlendModes.ADD;
-        this.croix.blendMode=Phaser.BlendModes.ADD;
-        this.triangle.blendMode=Phaser.BlendModes.ADD;
+        this.fond=this.add.image(400,280,"fond");
+        this.mountA=this.add.image(400,280,"M1");
+        this.mountB=this.add.image(400,280,"M2");
+        this.mountC=this.add.image(400,280,"M3");
+        this.mountA.blendMode=Phaser.BlendModes.ADD;
+        this.mountB.blendMode=Phaser.BlendModes.ADD;
+        this.mountC.blendMode=Phaser.BlendModes.ADD;
     }
 
 
@@ -265,15 +263,15 @@ class Tableau1 extends Phaser.Scene{
             let touche=this.children.getByName(lettre);
             //si enfoncée le fond de touche est gris
             if(touche.toucheEnfoncee){
-                touche.setBackgroundColor("#888888")
+                touche.setBackgroundColor("rgba(255,255,255,0.53)")
             }else{
-                touche.setBackgroundColor("#000000")
+                touche.setBackgroundColor("rgba(0,0,0,0)")
             }
             //si actif le texte est vert sinon blanc
             if(touche.actif){
-                touche.setColor("#00FF00")
+                touche.setColor("#00d9ff")
             }else{
-                touche.setColor("#FFFFFF")
+                touche.setColor("#000517")
             }
 
             //--- interaction sur les formes ---
