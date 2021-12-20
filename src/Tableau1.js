@@ -1,7 +1,7 @@
 class Tableau1 extends Phaser.Scene {
 
 
-    //preload images/sons que je vais utiliser
+    //preload images que je vais utiliser
     preload() {
         //preload du fond
         this.load.image('fond', 'assets/fond.jpg');
@@ -15,9 +15,6 @@ class Tableau1 extends Phaser.Scene {
         for (let i = 1; i <= 10; i++) {
             this.load.image('scribble' + i, 'assets/anim/SCR' + i + '.png');
         }
-        //preload des sons
-        //this.load.audio('', 'assets/.mp3')
-
     }
 
     //création visuels
@@ -36,33 +33,22 @@ class Tableau1 extends Phaser.Scene {
         this.initKeyboard();
         //fonction visuel clavier
         this.creerClavier();
-        //fonction interactions
-        this.creerInteract();
-        //fonction Sons
-        this.creerSons();
         //fonction animations
         this.creerAnimations();
+        this.animstart = 0;
 
     }
 
-    //créations des sons
-    creerSons(){
-        //this. = this.sound.add('', {loop: false});
-        //this..volume = 1
-    }
-
-    //les images qui pop up quand touche du clavier down/up
-    creerInteract() {
+    //mes trucs qui pop, créer fonction pour les afficher
+    creerMont(){
         this.mont = this.add.image(0, 0, 'mont').setOrigin(0, 0);
-        this.mont.visible=false
-        this.mont.alpha=0
+    }
+    creerForest(){
         this.forest = this.add.image(0, 0, 'forest').setOrigin(0, 0);
-        this.forest.visible=false
-        this.forest.alpha=0
+    }
+    creerCerf() {
         this.cerf = this.add.image(200, 0, 'cerf').setOrigin(0, 0);
-        this.cerf.visible=false
-        this.cerf.alpha=0
-
+        this.cerf.alpha = 0
     }
 
     //creer le visuel du clavier pour vérif
@@ -83,25 +69,27 @@ class Tableau1 extends Phaser.Scene {
     }
 
     //creer visuel de l'animation/transition (en false)
-    creerAnimations(){
-        this.anims.create({
+    creerAnimations() {
+        this.crayon = this.anims.create({
             key: 'scribble',
             frames: [
-                { key: 'scribble1' },
-                { key: 'scribble2' },
-                { key: 'scribble3' },
-                { key: 'scribble4' },
-                { key: 'scribble5' },
-                { key: 'scribble6' },
-                { key: 'scribble7' },
-                { key: 'scribble8' },
-                { key: 'scribble9' },
-                { key: 'scribble10'}
+                {key: 'scribble1'},
+                {key: 'scribble2'},
+                {key: 'scribble3'},
+                {key: 'scribble4'},
+                {key: 'scribble5'},
+                {key: 'scribble6'},
+                {key: 'scribble7'},
+                {key: 'scribble8'},
+                {key: 'scribble9'},
+                {key: 'scribble10'}
             ],
             frameRate: 10,
             repeat: 0,
+            hideOnComplete: true
         })
     }
+
     //pas le meilleurs moyens?
 
 
@@ -152,55 +140,39 @@ class Tableau1 extends Phaser.Scene {
 
 
         if (lettre === "a") {
-            if (this.mont.visible === false) {
-                this.animation = this.add.sprite(400, 300).play('scribble', false)
-                this.animation.once('animationcomplete', () => {
-                    console.log('animationcomplete')
-                    this.animation.destroy()
-                    this.mont.visible = !this.mont.visible;
-                })
+            if (this.animstart === 0) {
+                this.animation = this.add.sprite(400, 300,'scribble1')
+                this.animation.play('scribble')
+                this.animation.on(Phaser.Animations.Events.ANIMATION_COMPLETE,function(){
+                    this.creerMont();
+                },this)
             }
-            else {
-                /**
-                 *
-                this.animation = this.add.sprite(400,300).play('scribble', false)
-                this.animation.setScale(-1, 1)
-                    console.log('animationcompleteREVERSE')
-                    this.animation.destroy()
-                 */
-                    this.mont.visible = !this.mont.visible;
-            }
-            this.CompositionA()
+            this.animstart = 1;
+            console.log(this.animstart)
         }
 
         if (lettre === "z") {
-            if (this.forest.visible===false){
-                this.animation = this.add.sprite(400, 300).play('scribble', false)
-                this.animation.once('animationcomplete', () => {
-                    console.log('animationcomplete')
-                    this.animation.destroy()
-                    this.forest.visible = !this.forest.visible;
-                })
+            if (this.animstart === 0) {
+                this.animation = this.add.sprite(400, 300,'scribble1')
+                this.animation.play('scribble')
+                this.animation.on(Phaser.Animations.Events.ANIMATION_COMPLETE,function(){
+                    this.creerForest();
+                },this)
             }
-            else {
-                this.forest.visible= !this.forest.visible;
-            }
-            this.CompositionZ()
+            console.log(this.animstart)
+            this.animstart = 1;
         }
 
         if (lettre === "e") {
-            if (this.cerf.visible===false) {
-                this.animation = this.add.sprite(400, 300).play('scribble', false)
-                this.animation.once('animationcomplete', () => {
-                    console.log('animationcomplete')
-                    this.animation.destroy()
-                    this.cerf.visible = !this.cerf.visible;
-                })
+            if (this.animstart === 0) {
+                this.animation = this.add.sprite(400, 300,'scribble1')
+                this.animation.play('scribble')
+                this.animation.on(Phaser.Animations.Events.ANIMATION_COMPLETE,function(){
+                    this.creerCerf();
+                },this)
             }
-            else {
-                this.cerf.visible= !this.cerf.visible;
-            }
-            this.CompositionE()
+            console.log(this.animstart)
+            this.animstart = 1;
         }
 
         /**
@@ -247,29 +219,6 @@ class Tableau1 extends Phaser.Scene {
     }
 
     //les compositions (Quoi afficher si A/Z/E/R/T/T etc... appuyer
-
-    CompositionA(){
-        this.tweens.add({
-            targets: this.mont,
-            duration: 22,
-            alpha: 1,
-            repeat: 0,
-            yoyo: false,
-        });
-        this.mont.alpha=0
-
-    }
-    CompositionZ() {
-        this.tweens.add({
-            targets: this.forest,
-            duration: 20,
-            alpha: 1,
-            repeat: 0,
-            yoyo: false,
-        });
-        this.forest.alpha = 0
-    }
-
     CompositionE() {
         this.tweens.add({
             targets: this.cerf,
