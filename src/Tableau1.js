@@ -68,7 +68,7 @@ class Tableau1 extends Phaser.Scene {
         }
     }
 
-    //creer visuel de l'animation/transition (en false)
+    //creer visuel de l'animation/transition
     creerAnimations() {
         this.crayon = this.anims.create({
             key: 'scribble',
@@ -89,7 +89,6 @@ class Tableau1 extends Phaser.Scene {
             hideOnComplete: true
         })
     }
-
     //pas le meilleurs moyens?
 
 
@@ -137,8 +136,6 @@ class Tableau1 extends Phaser.Scene {
     quandToucheRelachee(lettre, objetGraphique) {
 
         //------------Variables---------------
-
-
         if (lettre === "a") {
             if (this.animstart === 0) {
                 this.animation = this.add.sprite(400, 300,'scribble1')
@@ -150,7 +147,7 @@ class Tableau1 extends Phaser.Scene {
             this.animstart = 1;
             console.log(this.animstart)
         }
-
+        //toujours des problèmes :/
         if (lettre === "z") {
             if (this.animstart === 0) {
                 this.animation = this.add.sprite(400, 300,'scribble1')
@@ -175,25 +172,9 @@ class Tableau1 extends Phaser.Scene {
             this.animstart = 1;
         }
 
-        /**
-         *
-        if (lettre === "s") {
-            if (this.XX.visible==false){
-            }
-            this.XX.visible= !this.XX.visible;
-            this.CompositionS()
-        }
-        if (lettre === "T") {
-            this.XX.visible= !this.XX.visible;
-            this.CompositionT()
-        }
-        if (lettre === "m") {
-            this.XX.visible= !this.XX.visible;
-            this.CompositionM()
-        }*/
     }
 
-    //update verif interactions des touches (clavier/couleurs)
+    //update. verif interactions des touches (clavier/couleurs)
     update(){
         //pour chacune des lettres on va tester si il faut faire des choses ou non
         for (let lettre of this.lettres) {
@@ -219,48 +200,37 @@ class Tableau1 extends Phaser.Scene {
     }
 
     //les compositions (Quoi afficher si A/Z/E/R/T/T etc... appuyer
-    CompositionE() {
-        this.tweens.add({
-            targets: this.cerf,
-            size:5,
-            duration: 20,
-            alpha: 1,
-            repeat: 0,
-            yoyo: false,
-        });
-        this.cerf.alpha = 0
-    }
     /**
      *
     CompositionR() {
         this.tweens.add({
-            targets: this.msn,
+            targets: this.xx,
             duration: 20,
             alpha: 1,
             repeat: 0,
             yoyo: false,
         });
-        this.msn.alpha = 0
+        this.xx.alpha = 0
     }
     CompositionT() {
         this.tweens.add({
-            targets: this.cc,
+            targets: this.xx,
             duration: 20,
             alpha: 1,
             repeat: 0,
-            yoyo: false,
+            xx: false,
         });
         this.cc.alpha = 0
     }
     CompositionY() {
         this.tweens.add({
-            targets: this.bar,
+            targets: this.xx,
             duration: 20,
             alpha: 1,
             repeat: 0,
             yoyo: false,
         });
-        this.bar.alpha = 0
+        this.xx.alpha = 0
     }
     */
 }
