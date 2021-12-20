@@ -171,7 +171,6 @@ class Tableau1 extends Phaser.Scene {
             console.log(this.animstart)
             this.animstart = 1;
         }
-
     }
 
     //update. verif interactions des touches (clavier/couleurs)

@@ -1,0 +1,46 @@
+Idée de combinaisons de plusieurs fond différents
+		          plusieurs 1 er plan différents
+		          sons différents
+		          filtre différents etc...
+load,
+creerFond() {
+ici on créer tous les fonds
+}
+même pour les autres etc...
+A=fond1
+B=fond2
+C=fond3
+
+Q=plan1
+S=plan2
+D=plan3
+
+W=filtre1
+X=filtre2
+C=filtre3
+etc...
+
+si A relaché, alors fond 1 mais faire en sorte de ne pas pouvoir B relaché, C relaché etc
+même règle pour les plans,filtres,sons
+
+creerEasteregg(){
+créer images spéciales etc...
+genre add.image(el famoso sam)
+}
+si combinaisons spéciale genre A,Q,W
+alors
+afficher sam dans Easteregg par exemple
+
+rajouter animations "crayon","crayon(reverse)" pour effacer
+rajouter animations "glissade" des plan ( de droite à gauche ou l'inverse, ou de haut en bas etc...)
+
+et voilà :D
+
+:)...
+mais j'ai mal géré mon temps :/
+et j'ai pas vraiment toutes ces capacités
+mais avec de la patience, de l'entraide, et de l'organisation, moi petit élève aurait pu :(
+
+merci d'avoir lu d'ailleurs, bonne chance pour les corrections !!
+
+
