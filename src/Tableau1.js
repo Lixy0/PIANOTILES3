@@ -1,9 +1,5 @@
 class Tableau1 extends Phaser.Scene {
 
-    //mes variables false
-    EasterEggs(){
-        this.startup=false;
-    }
 
     //preload images/sons que je vais utiliser
     preload() {
@@ -15,6 +11,10 @@ class Tableau1 extends Phaser.Scene {
         this.load.image('forest', 'assets/forest1.png');
         this.load.image('cerf', 'assets/cerf.png');
 
+        //preload des animations/transitions
+        for (let i = 1; i <= 10; i++) {
+            this.load.image('scribble' + i, 'assets/anim/SCR' + i + '.png');
+        }
         //preload des sons
         //this.load.audio('', 'assets/.mp3')
 
@@ -36,13 +36,13 @@ class Tableau1 extends Phaser.Scene {
         this.initKeyboard();
         //fonction visuel clavier
         this.creerClavier();
-
         //fonction interactions
         this.creerInteract();
         //fonction Sons
         this.creerSons();
-        //fonction EasterEggs
-        this.EasterEggs();
+        //fonction animations
+        this.creerAnimations();
+
     }
 
     //créations des sons
@@ -59,7 +59,7 @@ class Tableau1 extends Phaser.Scene {
         this.forest = this.add.image(0, 0, 'forest').setOrigin(0, 0);
         this.forest.visible=false
         this.forest.alpha=0
-        this.cerf = this.add.image(0, 0, 'cerf').setOrigin(0, 0);
+        this.cerf = this.add.image(200, 0, 'cerf').setOrigin(0, 0);
         this.cerf.visible=false
         this.cerf.alpha=0
 
@@ -81,6 +81,28 @@ class Tableau1 extends Phaser.Scene {
             objetGraphique.name = lettre;
         }
     }
+
+    //creer visuel de l'animation/transition (en false)
+    creerAnimations(){
+        this.anims.create({
+            key: 'scribble',
+            frames: [
+                { key: 'scribble1' },
+                { key: 'scribble2' },
+                { key: 'scribble3' },
+                { key: 'scribble4' },
+                { key: 'scribble5' },
+                { key: 'scribble6' },
+                { key: 'scribble7' },
+                { key: 'scribble8' },
+                { key: 'scribble9' },
+                { key: 'scribble10'}
+            ],
+            frameRate: 10,
+            repeat: 0,
+        })
+    }
+    //pas le meilleurs moyens?
 
 
     //keyup & keydown
@@ -130,40 +152,72 @@ class Tableau1 extends Phaser.Scene {
 
 
         if (lettre === "a") {
-            if (this.mont.visible===true){
+            if (this.mont.visible === false) {
+                this.animation = this.add.sprite(400, 300).play('scribble', false)
+                this.animation.once('animationcomplete', () => {
+                    console.log('animationcomplete')
+                    this.animation.destroy()
+                    this.mont.visible = !this.mont.visible;
+                })
             }
-            this.mont.visible= !this.mont.visible;
+            else {
+                /**
+                 *
+                this.animation = this.add.sprite(400,300).play('scribble', false)
+                this.animation.setScale(-1, 1)
+                    console.log('animationcompleteREVERSE')
+                    this.animation.destroy()
+                 */
+                    this.mont.visible = !this.mont.visible;
+            }
             this.CompositionA()
         }
+
         if (lettre === "z") {
             if (this.forest.visible===false){
+                this.animation = this.add.sprite(400, 300).play('scribble', false)
+                this.animation.once('animationcomplete', () => {
+                    console.log('animationcomplete')
+                    this.animation.destroy()
+                    this.forest.visible = !this.forest.visible;
+                })
             }
-            this.forest.visible= !this.forest.visible;
+            else {
+                this.forest.visible= !this.forest.visible;
+            }
             this.CompositionZ()
         }
+
         if (lettre === "e") {
-            if (this.cerf.visible===false){
+            if (this.cerf.visible===false) {
+                this.animation = this.add.sprite(400, 300).play('scribble', false)
+                this.animation.once('animationcomplete', () => {
+                    console.log('animationcomplete')
+                    this.animation.destroy()
+                    this.cerf.visible = !this.cerf.visible;
+                })
             }
-            this.cerf.visible= !this.cerf.visible;
+            else {
+                this.cerf.visible= !this.cerf.visible;
+            }
             this.CompositionE()
         }
 
         /**
          *
-        if (lettre === "r") {
-            if (this.msn.visible==false){
-                this.msnsou.play()
+        if (lettre === "s") {
+            if (this.XX.visible==false){
             }
-            this.msn.visible= !this.msn.visible;
-            this.CompositionR()
+            this.XX.visible= !this.XX.visible;
+            this.CompositionS()
         }
-        if (lettre === "t") {
-            this.cc.visible= !this.cc.visible;
+        if (lettre === "T") {
+            this.XX.visible= !this.XX.visible;
             this.CompositionT()
         }
-        if (lettre === "y") {
-            this.bar.visible= !this.bar.visible;
-            this.CompositionY()
+        if (lettre === "m") {
+            this.XX.visible= !this.XX.visible;
+            this.CompositionM()
         }*/
     }
 
@@ -197,12 +251,13 @@ class Tableau1 extends Phaser.Scene {
     CompositionA(){
         this.tweens.add({
             targets: this.mont,
-            duration: 20,
+            duration: 22,
             alpha: 1,
             repeat: 0,
             yoyo: false,
         });
         this.mont.alpha=0
+
     }
     CompositionZ() {
         this.tweens.add({
@@ -218,6 +273,7 @@ class Tableau1 extends Phaser.Scene {
     CompositionE() {
         this.tweens.add({
             targets: this.cerf,
+            size:5,
             duration: 20,
             alpha: 1,
             repeat: 0,
